@@ -6,10 +6,10 @@ REGEX_PASSWORD ='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
 REGEX_EMAIL = '^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
 
-def Vaildation_email(email):
+def vaildation_email(email):
     if not re.match(REGEX_EMAIL, email):
-        raise ValidationError('Check_email')
+        raise ValidationError('INVALID_EMAIL')
 
-def Vaildation_password(password):
+def vaildation_password(password):
     if not re.match(REGEX_PASSWORD, password):
-        raise ValidationError('Check_password')
+        raise ValidationError('INVALID_PASSWORD')

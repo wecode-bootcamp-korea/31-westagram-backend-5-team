@@ -4,7 +4,7 @@ from django.http  import JsonResponse
 from django.views import View
 
 from users.models      import User
-from users.vaildation  import Vaildation_email, Vaildation_password
+from users.vaildation  import vaildation_email, vaildation_password
 
 class SignUpView(View):
     def post(self, request):
@@ -15,9 +15,9 @@ class SignUpView(View):
             phone      = data['phone']
             password   = data['password']
            
-            Vaildation_email(email)
+            vaildation_email(email)
 
-            Vaildation_password(password)
+            vaildation_password(password)
             
             if User.objects.filter(email=email).exists():
                 return JsonResponse({'message': "User already exists"}, status=401)
