@@ -17,6 +17,6 @@ def overlap_email(email):
     if User.objects.filter(email=email).exists():
         raise ValidationError("EMAIL_OVERLAP_ERROR")
 
-def validate_sign_up(id,password):
-    if not User.objects.filter(email=id,password=password).exists():
+def validate_sign_up(email,password):
+    if not User.objects.filter(email=email,password=password).exists():
         raise ValidationError("INVALID_USER")

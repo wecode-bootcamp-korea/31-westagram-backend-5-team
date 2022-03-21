@@ -37,10 +37,10 @@ class SignInView(View):
     def post(self, request):
         try:
             data     = json.loads(request.body)
-            id       = data['email']
+            email    = data['email']
             password = data['password']
 
-            validate_sign_up(id,password)
+            validate_sign_up(email,password)
             return JsonResponse({"message" : "SUCCESS"} , status=200)
         except KeyError:
             return JsonResponse({"message" : "KEY_ERROR"} , status=400)
