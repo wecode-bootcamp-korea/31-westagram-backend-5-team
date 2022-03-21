@@ -19,6 +19,7 @@ class SignUpView(View):
 
             validate_email(email)
             validate_password(password)
+            overlap_email(email)
 
             User.objects.create(
                 name         = name,
@@ -26,13 +27,11 @@ class SignUpView(View):
                 password     = password,
                 phone_number = phone_number
             )
-            return JsonResponse({"message":"SUCCESS"}, status=201) 
-        except KeyError:
-            return JsonResponse({"message":"KEY_ERROR"},status=400)
-        except IntegrityError:
-            return JsonResponse({'message':'EMAIL_OVERLAP_ERROR'},status=400)
-        except ValidationError as error:
-            return JsonResponse({'message' : error.message},status=400)
+            return JsonResponse({"message" : "SUCCESS"} , status=201) 
+        except KeyError: 
+            return JsonResponse({"message" : "KEY_ERROR"} , status=400)
+        except ValidationError as error: 
+            return JsonResponse({'message' : error.message} , status=400)
 
 class SignInView(View):
     def post(self, request):
@@ -42,8 +41,8 @@ class SignInView(View):
             password = data['password']
 
             validate_sign_up(id,password)
-            return JsonResponse({"message":"SUCCESS"}, status=200)
+            return JsonResponse({"message" : "SUCCESS"} , status=200)
         except KeyError:
-            return JsonResponse({"message":"KEY_ERROR"},status=400)
+            return JsonResponse({"message" : "KEY_ERROR"} , status=400)
         except ValidationError as error:
-            return JsonResponse({'message':error.message},status=401)
+            return JsonResponse({"message" : error.message} , status=401)
