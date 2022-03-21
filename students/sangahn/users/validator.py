@@ -12,3 +12,7 @@ def validate_password(password):
 
     if not re.match(PASSWORD_FORMAT, password):
         raise ValidationError("PASSWORD_FORMAT_ERROR")
+
+def validate_sign_up(id,password):
+    if not User.objects.filter(email=id,password=password).exists():
+        raise ValidationError("INVALID_USER")
