@@ -18,7 +18,3 @@ def validate_password(password):
 def check_email_duplication(email):
     if User.objects.filter(email=email).exists():
         raise ValidationError("EMAIL_DUPLICATE_ERROR")
-
-def validate_sign_in(email,password):
-    if not User.objects.filter(email=email,password=password).exists():
-        raise ValidationError("INVALID_USER")
