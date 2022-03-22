@@ -1,4 +1,4 @@
-import json
+import json, bcrypt
 
 from django.http import JsonResponse
 from django.views import View
@@ -20,10 +20,12 @@ class SignUpView(View):
             check_email_duplication(email)
             validate_password(password)
 
+            password_encrypte = encrypte_password(password)
+
             User.objects.create(
                 name         = name,
                 email        = email,
-                password     = password,
+                password     = password_encrypte,
                 phone_number = phone_number
             )
             return JsonResponse({"message" : "SUCCESS"} , status=201) 
