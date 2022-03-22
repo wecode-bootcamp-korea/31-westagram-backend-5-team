@@ -20,12 +20,12 @@ class SignUpView(View):
             check_email_duplication(email)
             validate_password(password)
 
-            password_encrypte = encrypte_password(password)
+            password_encrypt = encrypt_password(password)
 
             User.objects.create(
                 name         = name,
                 email        = email,
-                password     = password_encrypte,
+                password     = password_encrypt,
                 phone_number = phone_number
             )
             return JsonResponse({"message" : "SUCCESS"} , status=201) 
