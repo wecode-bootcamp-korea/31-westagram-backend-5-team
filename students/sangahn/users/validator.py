@@ -1,4 +1,4 @@
-import re, bcrypt
+import re
 
 from django.core.exceptions import ValidationError 
 
@@ -18,6 +18,3 @@ def validate_password(password):
 def check_email_duplication(email):
     if User.objects.filter(email=email).exists():
         raise ValidationError("EMAIL_DUPLICATE_ERROR")
-
-def encrypte_password(password):
-    return bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt()).decode('utf-8')
