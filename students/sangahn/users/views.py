@@ -1,10 +1,10 @@
-import json
+import json, bcrypt
 
-from django.http import JsonResponse
-from django.views import View
+from django.http            import JsonResponse
+from django.views           import View
 from django.core.exceptions import ValidationError 
 
-from users.models import User
+from users.models    import User
 from users.validator import *
 
 class SignUpView(View):
@@ -20,10 +20,12 @@ class SignUpView(View):
             check_email_duplication(email)
             validate_password(password)
 
+            password_encrypt = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt()).decode('utf-8')
+
             User.objects.create(
                 name         = name,
                 email        = email,
-                password     = password,
+                password     = password_encrypt,
                 phone_number = phone_number
             )
             return JsonResponse({"message" : "SUCCESS"} , status=201) 
