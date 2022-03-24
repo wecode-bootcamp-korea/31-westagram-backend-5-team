@@ -48,7 +48,7 @@ class SignInView(View):
 
                 token = jwt.encode({'user_id':user.id}, settings.SECRET_KEY, settings.ALGORITHM)
 
-                return JsonResponse({'token': token}, status=200)
+                return JsonResponse({'message': 'SUCCESS','Authorization':token} ,status = 200)
 
             except User.DoesNotExist:
                 return JsonResponse( {'message': 'YOUR EMAIL DOES NOT EXIST'}, status=400)
